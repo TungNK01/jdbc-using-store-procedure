@@ -9,8 +9,6 @@ public class ProductDAO implements IProductDAO{
     private String jdbcUsername = "root";
     private String jdbcPassword = "12345678";
 
-    private static final String INSERT_PRODUCTS_SQL = "INSERT INTO products (name, price, quantity) VALUES (?, ?, ?);";
-
     public ProductDAO(){}
     protected Connection getConnection() {
         Connection connection = null;
@@ -24,23 +22,9 @@ public class ProductDAO implements IProductDAO{
         }
         return connection;
     }
-    /*@Override
-    public void insertProduct(Product product) throws SQLException {
-        System.out.println(INSERT_PRODUCTS_SQL);
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCTS_SQL)) {
-            preparedStatement.setString(1, product.getName());
-            preparedStatement.setDouble(2, product.getPrice());
-            preparedStatement.setDouble(3, product.getQuantity());
-            System.out.println(preparedStatement);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-    }*/
 
      @Override
     public int insertProduct(Product product) throws SQLException {
-        System.out.println(INSERT_PRODUCTS_SQL);
         try (Connection connection = getConnection()) {
             CallableStatement cs=connection.prepareCall("{call insert_product(?,?,?,?)}");
             cs.setString(1, product.getName());

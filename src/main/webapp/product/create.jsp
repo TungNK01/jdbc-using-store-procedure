@@ -7,6 +7,7 @@
 </head>
 <body>
 <div align="center">
+    <h3>${message}</h3>
     <form method="post">
         <table border="1" cellpadding="5">
             <caption>

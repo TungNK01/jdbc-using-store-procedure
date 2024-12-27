@@ -79,6 +79,13 @@ public class ProductServlet extends HttpServlet {
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
+        String message ="";
+        if (result > 0) {
+            message = "Product created successfully";
+        } else {
+            message = "Failed to create product";
+        }
+        request.setAttribute("message", message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/create.jsp");
         dispatcher.forward(request, response);
     }
